@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        <h1>{{name}}</h1>
+        <hr>
+        바나나 : <input type="checkbox" v-model="fruits" value="banana">
+        사과 : <input type="checkbox" v-model="fruits" value="apple">
+        수박 : <input type="checkbox" v-model="fruits" value="watermelon">
+        <h2>선택한 과일</h2>
+        <ul>
+            <li v-for="fruit in fruits">{{fruit}}</li>
+        </ul>
+
+        <select name="car" id="car" v-model="dreamcar">
+            <option v-for="car in cars" v-model="car">{{car}}</option>
+        </select>
+        <h2>My Dream Car : {{dreamcar}}</h2>
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const name = ref('gojo satoru');
+                const fruits = ref([])
+                const cars = ref(['리어카', '봉고차', '로봇청소기', '세발자전거'])
+                const dreamcar = ref('')
+
+                return {
+                    name,
+                    fruits,
+                    cars,
+                    dreamcar
+                }
+            }
+
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

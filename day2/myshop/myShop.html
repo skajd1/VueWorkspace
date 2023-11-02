@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<style type="text/css">
+		@import url("shop.css");
+	</style>
+</head>
+
+<body>
+	<div class="nav-bar"></div>
+	<div id="app">
+		<div class="product">
+			<div class="product-image">
+				<!-- 1. 상품 이미지 넣기-->
+				<img :src="image" alt="초기이미지" />
+			</div>
+
+			<div class="product-info">
+				<!--  2. 상품명 -->
+				<h1>상품명</h1>
+				<h1>{{product}}</h1>
+				<!-- 3. inStock 값에 따라 화면에 'In Stock' OR 'Out of Stock' 표시-->
+				<p v-if="inStock">In Stock</p>
+				<p v-else>Out of Stock</p>
+				<!-- 4. onSale 값에 따라 화면에 'On Sale!' 표시-->
+				<p v-if="onSale">On Sale!</p>
+
+				<!--  5. 상품설명 -->
+				<p>{{description}}</p>
+
+
+				<!--  6. 상품 상세 설명 -->
+				<ul>
+					<li v-for="detail in details">{{detail}}</li>
+				</ul>
+
+				<!--  7. color-box -->
+				<div style="display : flex">
+					<div v-for="option in options" :key="option.optionId">
+						<img :src="option.optionImage" alt="상품이미지" @click="image = option.optionImage"
+							style="width : 50px; height : 50px; cursor: pointer" />
+					</div>
+				</div>
+				<hr />
+				<!--  8. button event 처리  -->
+				<button @click="add">Add</button>
+				<button @click="remove">Remove</button>
+
+				<div class="cart">
+					이거 봐, {{cart}}개나 담김
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const { createApp, ref, reactive } = Vue;
+		const app = createApp({
+
+			setup() {
+				const product = ref("Dadas Blouse");
+				const image = ref("./img/blueBlouse.jpg");
+				const inStock = ref(true);
+				const max = ref(10);
+				const onSale = ref(true);
+				const description = ref("올봄 잇아이템");
+				const details = reactive(
+					["80% cotton", "20% polyester", "Gender-neutral"]
+				)
+				const cart = ref(0);
+				const options = reactive([
+					{
+						optionId: 2234,
+						optionColor: "violet",
+						optionImage: "./img/violetBlouse.jpg",
+					},
+					{
+						optionId: 2235,
+						optionColor: "blue",
+						optionImage: "./img/blueBlouse.jpg",
+					},
+				])
+				const add = () => {
+					cart.value += 1;
+					if (cart.value > max.value) {
+						cart.value = max.value;
+						alert("재고가 부족합니다.");
+					}
+				}
+				const remove = () => {
+					cart.value -= 1;
+					if (cart.value < 0) {
+						cart.value = 0;
+					}
+
+				}
+
+
+				return {
+					product,
+					image,
+					inStock,
+					max,
+					onSale,
+					description,
+					details,
+					options,
+					cart,
+					add,
+					remove
+
+				}
+			}
+		})
+
+		app.mount('#app')
+	</script>
+</body>
+
+</html>

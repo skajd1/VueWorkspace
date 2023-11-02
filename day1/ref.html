@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p> count : {{count}}</p>
+        <p> colors : {{colors}}</p>
+        <p> user : {{user.num}} {{user.name}}</p>
+        <button @click="gogo">gogo</button>
+
+
+    </div>
+    <script>
+        const { createApp, ref, reactive } = Vue;
+        const app = createApp({
+            setup() {
+                const count = ref(0)
+                const colors = ref([])
+                const user = reactive({
+                    num: 123,
+                    name: 'tommy'
+
+                })
+                const gogo = () => {
+                    count.value++
+                    colors.value.push('red')
+                    user.num++
+                    user.name = 'jerry'
+                }
+
+
+                return {
+                    count, colors, user, gogo
+                }
+            }
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <h1 v-pre>{{그대로 출력하3.}}</h1>
+            <h1 v-html="msg"></h1>
+            <h1> {{msg}}</h1>
+        </div>
+        <hr>
+        <div>
+            <a href="#" v-if="flag1">gogo</a>
+            <a href="#" v-if="flag2">stop</a>
+            <p v-show="flag1">show</p>
+            <button @click="change">button </button>
+            <div v-if="type == 'A'">first</div>
+            <div v-else-if="type == 'B'">second</div>
+            <div v-else-if="type == 'C'">third</div>
+            <div v-else>nothing</div>
+        </div>
+        <hr>
+        <div>
+            <ol>
+                <li v-for="system in systems">{{system}}</li>
+            </ol>
+        </div>
+        <hr>
+        <div>
+            <h3 v-bind:id="uid">this is h3</h3>
+            <h3 :id="uid">this is another h3</h3>
+        </div>
+        <img :src="src" alt="">
+
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const msg = ref('<h2>hello</h2>');
+                const flag1 = ref(true);
+                const flag2 = ref(false);
+                const systems = ref(['windows', 'mac', 'linux']);
+                const uid = ref('a123');
+                const src = ref('../images/k.png');
+                const type = ref('A');
+                const change = () => {
+                    flag1.value = !flag1.value;
+
+                }
+                function hello() {
+                    alert('hello')
+                }
+                return {
+                    msg, flag1, flag2, change, systems, uid, src, type, hello
+                }
+            }
+
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

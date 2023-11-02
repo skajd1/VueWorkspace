@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2 :style="{color : color, fontFamily : font}">{{result}}</h2>
+        <hr>
+        <div>
+            <h2 v->색상 목록</h2>
+            <ul>
+                <li v-for="color in colors">{{color}}</li>
+            </ul>
+
+            <h2> 글꼴 목록</h2>
+            <ul>
+                <li v-for="font in fonts">{{font}}</li>
+            </ul>
+        </div>
+        <div>
+            색 입력 :<input type="text" v-model="color">
+        </div>
+        <div>
+            글꼴 입력 :<input type="text" v-model="font">
+        </div>
+        <button @click="change">변경</button>
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const result = ref('내 손을봐, 대박임');
+                const color = ref('red');
+                const font = ref('굴림');
+                const change = () => {
+                    result.font = font.value;
+                    result.color = color.value;
+                }
+                return {
+                    result,
+                    colors: ['red', 'green', 'blue'],
+                    fonts: ['굴림', '궁서', '돋움'],
+                    color,
+                    font,
+                    change
+                }
+            }
+
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>
