@@ -21,6 +21,26 @@ function customerInsert() {
     localStorage.setItem("customerlist", JSON.stringify(customers.value));
 
 }
+function customerSelect(selectedNum) {
+    const customer = customers.value.find((item) => {
+        return item.num === selectedNum;
+    });
+    if (customer) {
+        num.value = customer.num;
+        name.value = customer.name;
+        address.value = customer.address;
+    }
+}
+function customerDelete() {
+    //현재 선택된 번호의 customer 를 storage에서 삭제
+    const index = customers.value.findIndex((item) => {
+        return item.num === num.value;
+    });
+    if (index > -1) {
+        customers.value.splice(index, 1);
+        localStorage.setItem("customerlist", JSON.stringify(customers.value));
+    }
+}
 </script>
 
 <template>
@@ -68,7 +88,7 @@ function customerInsert() {
                         </tr>
                     </thead>
                     <tbody id="tb">
-                        <tr v-for="customer in customers" :key="customer.num">
+                        <tr v-for="customer in customers" :key="customer.num" @click="customerSelect(customer.num)">
                             <td>{{ customer.num }}</td>
                             <td>{{ customer.name }}</td>
                             <td>{{ customer.address }}</td>
