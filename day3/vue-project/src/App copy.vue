@@ -1,16 +1,15 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
-import CustomerVue from './components/CustomerVue.vue'
-
+import TheWelcome from './components/TheWelcome.vue'
+import Test from './components/test.vue'
 </script>
 
 <template>
   <header>
-
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <CustomerVue />
+      <HelloWorld msg="You did it!" />
     </div>
   </header>
 
