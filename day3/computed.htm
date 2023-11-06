@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p> 책의 권수</p>
+        <p> {{bookLength}}</p>
+        <p> {{bookLength}}</p>
+        <button @click="book.push('new book')">책 추가</button>
+    </div>
+    <script>
+        const { createApp, ref, computed } = Vue;
+        const app = createApp({
+            setup() {
+                const book = ref([
+                    'harry potter',
+                    'who movoed my cheese?',
+                    'tempest'
+
+                ])
+                return {
+                    book,
+                    bookLength: computed(() => {
+                        console.log('computed')
+                        return book.value.length
+                    })
+                }
+
+            }
+
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

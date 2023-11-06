@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        x : <input type="number" v-model.number="x">
+        y : <input type="number" v-model.number="y">
+
+        <p> obj.count = {{obj.count}}</p>
+        <button @click="obj.count++">obj.count++</button>
+        <button @click="student.score.val++">student.score.val++</button>
+
+
+
+    </div>
+    <script>
+        const { createApp, ref, watch, reactive } = Vue;
+        const app = createApp({
+            setup() {
+                const x = ref(0)
+                const y = ref(0)
+                const obj = reactive({ count: 0 })
+                // watch([x, y], ([newX, newY], [oldX, oldY]) => {
+                //     console.log(`newX: ${newX}, newY: ${newY}, oldX: ${oldX}, oldY: ${oldY}`)
+                // })
+                const student = reactive({
+                    score: { val: 0 }
+                })
+                watch(
+                    () => x.value + y.value,
+                    (sum) => {
+                        console.log(`sum: ${sum}`)
+                    }
+                )
+                watch(
+                    () => obj.count,
+                    (count) => {
+                        console.log(`count: ${count}`)
+                    }
+                )
+                watch(
+                    () => student.score,
+                    (val) => {
+                        console.log(`val: ${val}`)
+                    },
+                    { deep: true }
+                )
+                return {
+                    x, y, obj, student
+                }
+            }
+
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

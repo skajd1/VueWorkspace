@@ -10,15 +10,19 @@
 
 <body>
     <div id="app">
-
+        <p> {{msg}}</p>
+        <input type="text" v-model="msg">
     </div>
     <script>
-        const { createApp, ref } = Vue;
+        const { createApp, ref, watch } = Vue;
         const app = createApp({
             setup() {
-
+                const msg = ref('super man')
+                watch(msg, (newVal, oldVal) => {
+                    console.log(`newVal: ${newVal}, oldVal: ${oldVal}`)
+                })
                 return {
-
+                    msg
                 }
             }
 
