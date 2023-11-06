@@ -1,5 +1,6 @@
 <script setup>
 import CustomerVue from './components/CustomerVue.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 </script>
 
@@ -9,13 +10,12 @@ import CustomerVue from './components/CustomerVue.vue'
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <CustomerVue />
+      <HelloWorld msg="" />
     </div>
   </header>
 
   <main>
-    <TheWelcome />
-    <Test />
+    <CustomerVue />
   </main>
 </template>
 
