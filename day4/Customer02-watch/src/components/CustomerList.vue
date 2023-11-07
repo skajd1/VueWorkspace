@@ -1,105 +1,73 @@
 <script setup>
 import { ref, reactive } from "vue";
+import CustomerInput from "./CustomerInput.vue";
+import emit from "./CustomerInput.vue";
 //v-model과 연결한 반응형 변수 선언
-const num = ref("");
-const name = ref("");
-const address = ref("");
+
 const customers = ref([
   { num: 1, name: "tommy", address: "la" },
   { num: 2, name: "harry", address: "seoul" },
   { num: 3, name: "jane", address: "seoul" },
 ]);
+const p = reactive({
+  num: "",
+  name: "",
+  address: "",
+});
 const customers2 = ref([]);
 customers2.value = customers.value;
 
-//1.초기화면에 보여줄 데이터 준비
-function customerAll() {
-  customers.value = customers2.value;
+function customerInsert(newCustomer) {
+  customers.value.push(newCustomer);
 }
-
-//2.add
-function customerInsert() {
-  //사용자 입력 값을 체크하기
-  const new_customer = {
-    num: num.value,
-    name: name.value,
-    address: address.value,
-  };
-  customers.value.push(new_customer); //화면 업뎃
-
-  //다시 저장
-  localStorage.setItem("customerlist", JSON.stringify(customers.value)); //localstorage
-  //alert("등록되었습니다");
+function customerDelete(snum) {
+  const index = customers.value.findIndex((c) => c.num === snum);
+  customers.value.splice(index, 1);
+}
+function customerSelectOne(snum) {
+  const customer = customers.value.find((c) => c.num === snum);
+  console.log(customer);
+  // 자식(input vue) 로 보내야함
+  p.num = customer.num;
+  p.name = customer.name;
+  p.address = customer.address;
+}
+function customerUpdate(info) {
+  const index = customers.value.findIndex((c) => c.num === parseInt(info.num));
+  customers.value[index].address = info.address;
+}
+function customerSearch(sname) {
   init();
-}
-
-function customerSelectOne(key) {
-  let c = customers.value.find((item) => {
-    return item.num == key;
+  const tmp = [];
+  customers.value.find((c) => {
+    if (c.name.includes(sname.name)) {
+      tmp.push(c);
+    }
   });
-
-  num.value = c.num;
-  name.value = c.name;
-  address.value = c.address;
+  customers.value = tmp;
 }
 
-//delete ok
-function customerDelete() {
-  const key = num.value; //삭제할 번호
-
-  if (customers.value) {
-    customers.value = customers.value.filter((c) => {
-      return c.num != key;
-    });
-  } else {
-    customers.value = [];
-  }
-
-  //다시 저장
-  localStorage.setItem("customerlist", JSON.stringify(customers.value)); //localstorage
-  //alert("삭제가 완료되었습니다.");
-  init();
-}
 function init() {
-  num.value = "";
-  name.value = "";
-  address.value = "";
-}
-
-function customerUpdate() {
-  let key = num.value; //수정할 번호
-  let kaddress = address.value; //수정할 번호
-
-  if (customers.value) {
-    customers.value.find((c) => {
-      if (c.num == key) {
-        c.address = kaddress;
-        return;
-      }
-    });
-  }
-  console.log(customers.value);
-  init();
-  localStorage.setItem("customerlist", JSON.stringify(customers.value)); //localstorage
-}
-
-function customerSearch() {
-  let param = address.value;
-  customers2.value = customers.value;
-  console.log(customers2.value);
-  if (customers.value) {
-    customers.value = customers.value.filter((c) => {
-      return c.address == param;
-    });
-  }
-  init();
+  customers.value = customers2.value;
 }
 </script>
 
 <template>
   <div>
     <div class="container">
-      <slot></slot>
+      <CustomerInput
+        :customer="p"
+        @customerInsert="customerInsert"
+        @customerDelete="customerDelete"
+        @customerUpdate="customerUpdate"
+        @customerSearch="customerSearch"
+        @customerAll="init"
+      >
+        <template #list>
+          <h3>사용자 입력</h3>
+        </template>
+      </CustomerInput>
+      <h3>사용자 목록</h3>
       <table class="table text-center">
         <thead>
           <tr>

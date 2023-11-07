@@ -2,7 +2,6 @@
 import { ref, reactive } from "vue";
 import CustomerTop from "./components/CustomerTop.vue";
 import CustomerList from "./components/CustomerList.vue";
-import CustomerInput from "./components/CustomerInput.vue";
 </script>
 
 <template>
@@ -13,11 +12,7 @@ import CustomerInput from "./components/CustomerInput.vue";
     </CustomerList>
   </header>
 
-  <main>
-    <CustomerInput>
-      <h3>사용자 등록</h3>
-    </CustomerInput>
-  </main>
+  <main></main>
 </template>
 
 <style scoped>
