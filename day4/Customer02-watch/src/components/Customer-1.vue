@@ -4,12 +4,9 @@ import { ref, reactive, watchEffect } from "vue";
 const num = ref("");
 const name = ref("");
 const address = ref("");
-const customers = ref([
-  { num: 1, name: "tommy", address: "la" },
-  { num: 2, name: "harry", address: "seoul" },
-  { num: 3, name: "jane", address: "seoul" },
-]);
+const customers = ref([]);
 const customers2 = ref([]);
+customers.value = JSON.parse(localStorage.getItem("customerlist")) || [];
 customers2.value = customers.value;
 
 watchEffect(() => {

@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import CustomerVue from './components/Customer-1.vue';
 import HelloWorld from './components/HelloWorld.vue';
-const code = ref('고양시 사는');
+const code = ref('고양시 사는 애옹');
 </script>
 
 <template>

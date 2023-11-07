@@ -1,19 +1,24 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, watchEffect } from "vue";
 import CustomerInput from "./CustomerInput.vue";
 import emit from "./CustomerInput.vue";
 //v-model과 연결한 반응형 변수 선언
 
-const customers = ref([
-  { num: 1, name: "tommy", address: "la" },
-  { num: 2, name: "harry", address: "seoul" },
-  { num: 3, name: "jane", address: "seoul" },
-]);
+const customers = ref([]);
 const p = reactive({
   num: "",
   name: "",
   address: "",
 });
+customers.value = JSON.parse(localStorage.getItem("customers")) || [];
+watchEffect(() => {
+  updateData(customers.value);
+});
+
+function updateData() {
+  localStorage.setItem("customers", JSON.stringify(customers.value));
+}
+
 const customers2 = ref([]);
 customers2.value = customers.value;
 
