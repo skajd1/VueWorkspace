@@ -1,16 +1,16 @@
 <script setup>
-import CustomerVue from './components/CustomerVue.vue'
-import HelloWorld from './components/HelloWorld.vue'
-
+import { ref } from 'vue';
+import CustomerVue from './components/Customer-1.vue';
+import HelloWorld from './components/HelloWorld.vue';
+const code = ref('고양시 사는');
 </script>
 
 <template>
   <header>
-
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="" />
+      <HelloWorld msg="애옹" :code="code" />
     </div>
   </header>
 
