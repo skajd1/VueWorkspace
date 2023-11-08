@@ -1,4 +1,28 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { insert } from "../api/customer.js";
+const router = useRouter();
+
+const num = ref("");
+const name = ref("");
+const address = ref("");
+
+function customerInsert() {
+  insert(
+    { num: num.value, name: name.value, address: address.value },
+    (res) => {
+      if (res.status == 200) router.push("/list");
+    },
+    (e) => {
+      console.log(e);
+    }
+  );
+}
+function customerAll() {
+  router.push("/list");
+}
+</script>
 
 <template>
   <div>
@@ -25,27 +49,6 @@
             value="등록"
             id="btnInsert"
             @click="customerInsert"
-          />
-          <input
-            type="button"
-            class="btn btn-primary"
-            value="수정"
-            id="btnUpdate"
-            @click="customerUpdate"
-          />
-          <input
-            type="button"
-            class="btn btn-primary"
-            value="삭제"
-            id="btnDelete"
-            @click="customerDelete"
-          />
-          <input
-            type="button"
-            class="btn btn-primary"
-            value="검색"
-            id="btnUpdate"
-            @click="customerSearch"
           />
           <input
             type="button"

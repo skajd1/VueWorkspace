@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { selectOne } from "../api/customer.js";
+import { selectOne, deleteOne, update } from "../api/customer.js";
 import { useRouter, useRoute } from "vue-router";
 const c = ref({});
 const route = useRoute();
@@ -19,6 +19,31 @@ function getOne() {
       console.log(e);
     }
   );
+}
+function customerDelete() {
+  deleteOne(
+    route.params.num,
+    (res) => {
+      if (res.status == 200) router.push("/list");
+    },
+    (e) => {
+      console.log(e);
+    }
+  );
+}
+function customerUpdate() {
+  update(
+    { num: c.value.num, name: c.value.name, address: c.value.address },
+    () => {
+      router.push("/list");
+    },
+    (e) => {
+      console.log(e);
+    }
+  );
+}
+function customerAll() {
+  router.push("/list");
 }
 </script>
 
