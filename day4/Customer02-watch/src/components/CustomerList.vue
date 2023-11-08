@@ -41,11 +41,11 @@ function customerUpdate(info) {
   const index = customers.value.findIndex((c) => c.num === parseInt(info.num));
   customers.value[index].address = info.address;
 }
-function customerSearch(sname) {
+function customerSearch(saddress) {
   init();
   const tmp = [];
   customers.value.find((c) => {
-    if (c.name.includes(sname.name)) {
+    if (c.address.includes(saddress.address)) {
       tmp.push(c);
     }
   });

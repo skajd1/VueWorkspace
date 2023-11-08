@@ -1,52 +1,9 @@
-<script setup>
-import { ref, reactive, watchEffect } from "vue";
-const num = ref("");
-const name = ref("");
-const address = ref("");
-
-const props = defineProps(["customer"]);
-watchEffect(() => {
-  num.value = props.customer.num;
-  name.value = props.customer.name;
-  address.value = props.customer.address;
-}, props.customer);
-const emit = defineEmits([
-  "customerInsert",
-  "customerUpdate",
-  "customerDelete",
-  "customerSearch",
-  "customerAll",
-]);
-
-function customerInsert() {
-  emit("customerInsert", {
-    num: num.value,
-    name: name.value,
-    address: address.value,
-  });
-}
-function customerDelete() {
-  emit("customerDelete", num.value);
-}
-function customerSearch() {
-  emit("customerSearch", {
-    address: address.value,
-  });
-}
-function customerUpdate() {
-  emit("customerUpdate", {
-    num: num.value,
-    address: address.value,
-  });
-}
-function customerAll() {
-  emit("customerAll");
-}
-</script>
+<script setup></script>
 
 <template>
   <div>
     <div class="container">
+      <slot></slot>
       <form id="form1" class="form-horizontal">
         <slot name="list"></slot>
         <div class="form-group">
@@ -101,7 +58,6 @@ function customerAll() {
         </div>
       </form>
     </div>
-    <hr />
   </div>
 </template>
 
