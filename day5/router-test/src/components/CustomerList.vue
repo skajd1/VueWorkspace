@@ -1,13 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import {
-  selectAll,
-  selectOne,
-  insert,
-  deleteOne,
-  update,
-  searchByAddress,
-} from "../api/customer.js";
+import CustomerListItem from "./CustomerListItem.vue";
+import { selectAll } from "../api/customer.js";
 const customers = ref([]);
 
 onMounted(() => {
@@ -33,10 +27,12 @@ function getAll() {
           <tr>
             <th class="text-center">번호</th>
             <th class="text-center">이름</th>
-            <th class="text-center">주소</th>
+            <!-- <th class="text-center">주소</th> -->
           </tr>
         </thead>
-        <tbody id="tb"></tbody>
+        <tbody id="tb">
+          <CustomerListItem v-for="customer in customers" :c="customer" />
+        </tbody>
       </table>
     </div>
   </div>

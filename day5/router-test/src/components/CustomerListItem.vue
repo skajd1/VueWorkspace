@@ -1,10 +1,14 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+defineProps({ c: Object });
+</script>
 
 <template>
-  <tr v-for="c in customers" :key="c.num" @click="customerSelectOne(c.num)">
+  <tr>
     <td>{{ c.num }}</td>
-    <td>{{ c.name }}</td>
-    <td v-text="c.address"></td>
+    <td>
+      <RouterLink :to="{ name: 'detail', params: { num: c.num } }"> {{ c.name }}</RouterLink>
+    </td>
   </tr>
 </template>
 
