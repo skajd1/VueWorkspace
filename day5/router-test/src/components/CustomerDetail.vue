@@ -35,7 +35,7 @@ function customerUpdate() {
   update(
     { num: c.value.num, name: c.value.name, address: c.value.address },
     () => {
-      router.push("/list");
+      router.push(`/list`);
     },
     (e) => {
       console.log(e);

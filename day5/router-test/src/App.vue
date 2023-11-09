@@ -10,6 +10,8 @@ import CustomerTop from "./components/CustomerTop.vue";
   </header>
 
   <RouterView />
+  <RouterView name="first" />
+  <RouterView name="second" />
 </template>
 
 <style scoped>

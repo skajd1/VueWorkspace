@@ -1,22 +1,22 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 </script>
+
 <template>
-  <div class="wrapper">
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/list">List</RouterLink>
-      <RouterLink to="/insert">Insert</RouterLink>
-      <RouterLink to="/nested">Nested</RouterLink>
-      <RouterLink to="/named">Named</RouterLink>
-    </nav>
+  <h2>여기는 네스트뷰(Parent)</h2>
+  <nav>
+    <RouterLink to="/west">go west</RouterLink>
+    <RouterLink to="/east">go east</RouterLink>
+  </nav>
+
+  <div>
+    <RouterView />
   </div>
 </template>
-
-<style scoped>
+<style>
 nav {
   width: 100%;
-  font-size: 32px;
+  font-size: 16px;
   text-align: center;
   margin-top: 2rem;
 }
@@ -40,10 +40,6 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
   nav {
     text-align: left;
     margin-left: -1rem;
@@ -51,11 +47,6 @@ nav a:first-of-type {
 
     padding: 1rem 0;
     margin-top: 1rem;
-  }
-  div .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>
