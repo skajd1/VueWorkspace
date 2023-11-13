@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { selectAll, selectOne, insert, deleteOne, update } from "../api/customer.js";
-
+// 라우터 변경 테스트 해보기
 const useCustomerStore = defineStore("useCustomerStore", () => {
   //1. state
   const customers = ref([]);
