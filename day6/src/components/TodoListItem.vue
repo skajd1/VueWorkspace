@@ -4,7 +4,7 @@
   <tr>
     <td>{{ todo.id }}</td>
     <td :class="{ 'is-done': todo.isDone }">{{ todo.text }}</td>
-    <td>{{ todo.isDone }}</td>
+    <td>{{ todo.isDone == false ? "X" : "O" }}</td>
     <button @click="store.deleteTodo(todo.id)">Delete</button>
     <button @click="store.updateTodo(todo.id)">Done</button>
   </tr>
@@ -30,5 +30,12 @@ td {
   border-bottom: 1px solid #ccc;
   padding-left: 5rem;
   padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+button {
+  margin-left: 1rem;
+  background-color: #eee;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 </style>
